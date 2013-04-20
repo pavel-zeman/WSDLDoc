@@ -47,6 +47,7 @@
 				<attribute name="Commit" value="${git.revision}"/>
 			</manifest>
 		</jar>
+		<delete dir="${build.directory}/classes" quiet="true"/>
 	</target>
 
 	
