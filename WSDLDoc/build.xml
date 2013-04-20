@@ -1,0 +1,50 @@
+<project name="WSDLDoc" default="build">
+	
+	<property name="build.directory"      value="build"/>
+	<property name="source.directory"     value="src"/>
+
+	<!-- default target -->
+	<target name="build" depends="prepare, compile, package"/>
+	
+	<!-- delete current temporary structures, create new ones -->
+	<target name="prepare">
+		<delete dir="${build.directory}" quiet="true"/>
+		<mkdir dir="${build.directory}"/>
+	</target>
+	
+	<!-- compile all classes -->
+	<target name="compile">
+		<mkdir dir="${build.directory}/classes"/>
+	    <javac srcdir="${source.directory}" destdir="${build.directory}/classes" encoding="UTF-8" fork="true" debug="true" includeantruntime="false">
+	    	<classpath>
+	    		<fileset dir="lib">
+	    			<include name="*.jar"/>
+	    		</fileset>
+	    	</classpath>
+		</javac>
+	</target>
+	
+	<!-- create application JAR -->
+	<target name="package">
+		<loadfile srcfile="../.git/refs/heads/master" property="git.revision"/>
+		<tstamp>
+			<format property="build.timestamp" pattern="yyyy-MM-dd HH:mm"/>
+		</tstamp>
+
+		<copy todir="${build.directory}">
+			<fileset dir="lib"/>
+		</copy>
+		
+		<jar destfile="${build.directory}/wsdldoc.jar">
+			<fileset dir="${build.directory}/classes"/>
+			<fileset dir="resources"/>
+			<manifest>
+				<attribute name="Built-On" value="${build.timestamp}"/>
+				<attribute name="Commit" value="${git.revision}"/>
+				<attribute name="Main-Class" value="cz.WSDLDoc"/>
+			</manifest>
+		</jar>
+	</target>
+
+	
+</project>

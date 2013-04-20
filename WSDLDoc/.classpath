@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.7.0_03"/>
+	<classpathentry kind="lib" path="lib/saxon9he.jar"/>
+	<classpathentry kind="output" path="bin"/>
+	<referencedentry kind="lib" path="C:/software/Apache/xalan-j_2_7_1/serializer.jar" sourcepath="c:/software/Apache/xalan-j_2_7_1/src"/>
+</classpath>
