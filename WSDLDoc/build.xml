@@ -15,7 +15,7 @@
 	<!-- compile all classes -->
 	<target name="compile">
 		<mkdir dir="${build.directory}/classes"/>
-	    <javac srcdir="${source.directory}" destdir="${build.directory}/classes" encoding="UTF-8" fork="true" debug="true" includeantruntime="false">
+	    <javac srcdir="${source.directory}" destdir="${build.directory}/classes" encoding="UTF-8" fork="true" debug="true" includeantruntime="false" target="1.6" source="1.6">
 	    	<classpath>
 	    		<fileset dir="lib">
 	    			<include name="*.jar"/>
@@ -26,10 +26,12 @@
 	
 	<!-- create application JAR -->
 	<target name="package">
+		<replace file="../.git/refs/heads/master" token="\n"/>
 		<loadfile srcfile="../.git/refs/heads/master" property="git.revision"/>
 		<tstamp>
 			<format property="build.timestamp" pattern="yyyy-MM-dd HH:mm"/>
 		</tstamp>
+		
 
 		<copy todir="${build.directory}">
 			<fileset dir="lib"/>
@@ -40,8 +42,9 @@
 			<fileset dir="resources"/>
 			<manifest>
 				<attribute name="Built-On" value="${build.timestamp}"/>
-				<attribute name="Commit" value="${git.revision}"/>
 				<attribute name="Main-Class" value="cz.WSDLDoc"/>
+				<attribute name="Class-Path" value="saxon9he.jar"/>
+				<attribute name="Commit" value="${git.revision}"/>
 			</manifest>
 		</jar>
 	</target>
