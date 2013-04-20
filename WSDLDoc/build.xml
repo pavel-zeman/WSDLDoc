@@ -26,7 +26,7 @@
 	
 	<!-- create application JAR -->
 	<target name="package">
-		<replace file="../.git/refs/heads/master" token="\n"/>
+		<replaceregexp file="../.git/refs/heads/master" match="\n" replace="" flags="g"/>
 		<loadfile srcfile="../.git/refs/heads/master" property="git.revision"/>
 		<tstamp>
 			<format property="build.timestamp" pattern="yyyy-MM-dd HH:mm"/>
