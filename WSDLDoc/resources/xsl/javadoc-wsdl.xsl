@@ -285,7 +285,10 @@
 
 <xsl:template match="*[local-name(.) = 'documentation']" mode="documentation.render">
     <xsl:if test="$ENABLE-DESCRIPTION and string-length(.) &gt; 0">
-        <b>Description: </b><xsl:value-of select="." disable-output-escaping="yes"/><br/>
+        <b>Description: </b>
+        <xsl:call-template name="LFsToBRs">
+            <xsl:with-param name="input" select="."/>
+        </xsl:call-template>
     </xsl:if>
 </xsl:template>
    <xsl:template name="render.source-code-link">
